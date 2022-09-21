@@ -64,8 +64,9 @@ function createInputValidator(name, input, validators) {
 const inputs = [
     createInputValidator('prénom', firstNameEl, [validators.required, validators.needTwoChars]),
     createInputValidator('nom', lastNameEl, [validators.required, validators.needTwoChars]),
-    createInputValidator('tournois', quantityEl, [validators.required, validators.isNum]),
     createInputValidator('email', emailEl, [validators.required, validators.email]),
+    createInputValidator('date de naissance', birthDateEl, [validators.required]),
+    createInputValidator('tournois', quantityEl, [validators.required, validators.isNum]),
     createInputValidator('ville', firstLocationRadioEl, [validators.location]),
     createInputValidator('checkbox1', termsOfUsesEl, [validators.termOfuses]),
 ]
@@ -83,15 +84,39 @@ function validate(previousErrors, validator, input) {
     return previousErrors
 }
 
+function setInputErrors({ input, name }, errors) {
+    let inputs = [input]
+
+    inputs.forEach((el) => {
+        el.parentNode.setAttribute('data-error-visible', true)
+        errors.map((error) => el.parentNode.setAttribute(
+            'data-error',
+            error.error.replaceAll('{name}', name)
+        ))
+    })
+}
+
+function resetInputErrors({ input }) {
+    let inputs = [input]
+
+    inputs.forEach((el) => {
+        el.parentNode.removeAttribute('data-error-visible')
+        el.parentNode.removeAttribute('data-error')
+    })
+}
+
 function onSubmit(event) {
     event.preventDefault()
     let canSubmit = true
 
     inputs.forEach((inputValidator) => {
+        resetInputErrors(inputValidator)
+
         const errors = inputValidator.validators.reduce((prev, curr) => validate(prev, curr, inputValidator.input), [])
-        console.log('errors', errors)
+
         if (errors.length > 0) {
             canSubmit = false
+            setInputErrors(inputValidator,errors)
         }
     })
     if (canSubmit) {
