@@ -14,7 +14,7 @@ const validatorHandlers = {
     notBlank: (input) => input.value !== '',
     atLeast: (input, min) => input.value.trim().length >= min,
     isMail: (input) => emailRegex.test(input.value.trim()),
-    isNumber: (input) => isNaN(input),
+    isNumber: (input, min) => input.value >= min,
     checkboxChecked: ({name}) => formEl.querySelector(`[name="${name}"]:checked`) !== null,
     radioChecked: ({name}) => formEl.querySelector(`[name="${name}"]:checked`),
 }
@@ -42,7 +42,7 @@ const validators = {
     ),
     isNum: createValidator(
         validatorHandlers.isNumber,
-        [],
+        [0],
         'Le champs nombre doit être un nombre !'
     ),
     termOfuses: createValidator(
@@ -124,8 +124,6 @@ function onSubmit(event) {
         closeModal()
     }
 }
-
-
 
 function closeModal() {
     const modalbg = document.querySelector(".bground");
