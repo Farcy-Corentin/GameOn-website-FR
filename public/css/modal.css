@@ -188,6 +188,33 @@ main {
   margin: 15px auto;
 }
 
+.modal-success {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.modal-success .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  height: 35%;
+}
+
+.modal-success .content h2 {
+  margin-bottom: 16px;
+}
+
+.modal-success .content button {
+  background: #3876ac;
+}
+
+.modal-success .content button:hover {
+  filter: brightness(110%);
+}
+
 label {
   font-family: var(--font-default);
   font-size: 17px;

@@ -122,6 +122,7 @@ function onSubmit(event) {
     if (canSubmit) {
         formEl.reset()
         closeModal()
+        launchConfirmationModal()
     }
 }
 
@@ -131,3 +132,19 @@ function closeModal() {
 }
 
 formEl.addEventListener('submit', onSubmit)
+
+const confirmationModalEl = document.querySelector('.modal-success')
+const modalConfirmationBtn = confirmationModalEl.querySelector('.modal-success-btn');
+const closeConfirmationModalBtn = confirmationModalEl.querySelector('.close');
+
+closeConfirmationModalBtn.addEventListener('click', closeConfirmationModal)
+
+modalConfirmationBtn.addEventListener('click', closeConfirmationModal)
+
+function launchConfirmationModal() {
+    return confirmationModalEl.style.display = 'flex'
+}
+
+function closeConfirmationModal() {
+    return confirmationModalEl.style.display = 'none'
+}
