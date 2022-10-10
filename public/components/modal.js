@@ -1,10 +1,10 @@
 function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
+  const closeModal = document.getElementById("myTopnav");
+  if (closeModal.className === "topnav") {
+    return closeModal.className += " responsive";
+  } 
+  
+  return closeModal.className = "topnav";
 }
 
 // DOM Elements
@@ -28,5 +28,3 @@ function launchModal() {
 function closeModal() {
   return modalbg.style.display = "none";
 }
-
-
